@@ -1,0 +1,55 @@
+drop database if exists academia;
+create database academia;
+use academia;
+
+create table alunos (
+id_aluno int auto_increment primary key,
+nome varchar(100) not null,
+data_nascimento date,
+genero enum ("f", "m", "outro"),
+telefone varchar(15) not null,
+email varchar(100) not null,
+data_cadastro datetime
+);
+
+create table professores (
+id_professor int auto_increment primary key,
+nome varchar(100) not null,
+especialidade varchar (50) not null,
+telefone varchar(15) not null,
+email varchar(100) not null
+);
+
+create table planos (
+id_plano int auto_increment primary key,
+tipo_plano enum ("diario","mensal","anual"),
+descricao varchar(255),
+preco decimal(8,2),
+duracao_meses date
+);
+
+create table treinos(
+id_treino int auto_increment primary key,
+descricao varchar(255),
+data_inicio date,
+data_fim date
+);
+
+create table aulas(
+id_aula int auto_increment primary key,
+horario time,
+capacidade decimal(5)
+);
+
+create table pagamentos(
+id_pagamento int auto_increment primary key,
+data_pagamento datetime,
+valor_pago decimal(8,2),
+forma_pagamento enum ("cartao de debito","cartao de credito","dinheiro"),
+id_aluno int,
+id_plano int,
+foreign key (id_aluno) references alunos (id_aluno),
+foreign key (id_plano) references planos (id_plano)
+);
+
+
